@@ -1,54 +1,46 @@
 #include "main.h"
 
 /**
- * print_times_table - prints the times table
- * @n: integer for which the times table will be printed
- *
- * Description: prints the times table
- *
- * Return: void
+ * print_number - print out a number using printchar.
+ * @n: the number you want to print using putchar
+ * Return: 0.
  */
-
-void print_times_table(int n)
+void print_number(int n)
 {
-	int row, column, product;
+	int  temp, temp2, cnt, div, result, i;
 
-	if (n >= 0 && n < 15)
+	cnt = 0;
+	div = 1;
+	if (n < 0)
 	{
-		for (row = 0; row <= n; row++)
+		_putchar('-');
+	}
+	if (n == 0)
+	{
+		_putchar('0');
+	}
+	else
+	{
+		temp = n;
+		while (temp)
 		{
-			for (column = 0; column <= n; column++)
-			{
-				product = row * column;
-
-				if (column == 0)
-					_putchar('0');
-				else if (product < 10)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(product % 10 + '0');
-				}
-				else if (product >= 10 && product < 100)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar((product / 10) % 10 + '0');
-					_putchar(product % 10 + '0');
-				}
-				else if (product > 99 && product < 1000)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(product / 100 + '0');
-					_putchar((product / 10) % 10 + '0');
-					_putchar(product % 10 + '0');
-				}
-			}
-			_putchar('\n');
+			temp /= 10;
+			++cnt;
+		}
+		temp2 = cnt;
+		while (temp2 > 1)
+		{
+			div *= 10;
+			--temp2;
+		}
+		for (i = 0; i < cnt; ++i)
+		{
+			result = n / div;
+			if (result < 0)
+				result *= -1;
+			_putchar(result + '0');
+			n %= div;
+			div /= 10;
 		}
 	}
 }
